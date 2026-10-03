@@ -1,0 +1,5 @@
+Source: https://cloud.google.com/icons
+Archive: https://services.google.com/fh/files/misc/core-products-icons.zip
+Archive: https://services.google.com/fh/files/misc/category-icons.zip
+
+Reminder: Follow the provider's current trademark, brand, and icon-usage terms; check the official source page before publishing or redistributing these assets.

@@ -1,0 +1,61 @@
+{
+  "repository": "https://github.com/jgraph/drawio.git",
+  "branch": "dev",
+  "commit": "744cb5420fdf126efd7a09b1d7082ca3e12c0841",
+  "release": "31.4.6",
+  "license": "Apache-2.0",
+  "acquisition_date": "2026-09-21",
+  "source_to_destination_mapping": [
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE"
+    },
+    {
+      "source": "src/main/webapp/stencils/aws4.xml",
+      "destination": "aws/stencils/aws4.xml"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-AWS4.js",
+      "destination": "aws/sidebar/Sidebar-AWS4.js"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-AWS4b.js",
+      "destination": "aws/sidebar/Sidebar-AWS4b.js"
+    },
+    {
+      "source": "src/main/webapp/img/lib/azure2/**/*.svg",
+      "destination": "azure/icons/**/*.svg",
+      "path_behavior": "category-relative paths and filenames retained"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-Azure2.js",
+      "destination": "azure/sidebar/Sidebar-Azure2.js"
+    },
+    {
+      "source": "src/main/webapp/stencils/gcp2.xml",
+      "destination": "gcp/stencils/gcp2.xml"
+    },
+    {
+      "source": "src/main/webapp/stencils/gcp3.xml",
+      "destination": "gcp/stencils/gcp3.xml"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-GCP2.js",
+      "destination": "gcp/sidebar/Sidebar-GCP2.js"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-GCP3.js",
+      "destination": "gcp/sidebar/Sidebar-GCP3.js"
+    },
+    {
+      "source": "src/main/webapp/js/diagramly/sidebar/Sidebar-GCPIcons.js",
+      "destination": "gcp/sidebar/Sidebar-GCPIcons.js"
+    }
+  ],
+  "format_notes": {
+    "aws": "Stencil XML with unchanged draw.io sidebar JavaScript.",
+    "gcp": "Stencil XML with unchanged draw.io sidebar JavaScript.",
+    "azure": "Categorized SVG icons with unchanged draw.io sidebar JavaScript. Category-relative paths are retained."
+  },
+  "runtime_note": "Unchanged sidebar JavaScript retains original draw.io-relative paths and requires the draw.io runtime."
+}

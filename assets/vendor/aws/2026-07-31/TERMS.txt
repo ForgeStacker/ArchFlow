@@ -1,0 +1,4 @@
+Source: https://aws.amazon.com/architecture/icons/
+Archive: https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip
+
+Reminder: Follow the provider's current trademark, brand, and icon-usage terms; check the official source page before publishing or redistributing these assets.

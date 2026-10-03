@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/AmbientBackground.tsx","./src/components/IconExplorerCard.tsx","./src/components/IslandCard.tsx","./src/components/LlmConfigCard.tsx","./src/components/PromptCard.tsx","./src/components/ProviderPicker.tsx","./src/components/ResultCard.tsx","./src/components/StatusBar.tsx","./src/lib/api.ts"],"version":"5.9.3"}

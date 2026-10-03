@@ -1,0 +1,33 @@
+{
+  "archive_urls": [
+    "https://services.google.com/fh/files/misc/core-products-icons.zip",
+    "https://services.google.com/fh/files/misc/category-icons.zip"
+  ],
+  "archives": [
+    {
+      "member_count": 89,
+      "original_filename": "core-products-icons.zip",
+      "sha256": "6531a10f58bc599c24d9a455d81dd757c1a03c3c43da9cddf639b859c1c1eece",
+      "size_bytes": 318678,
+      "uncompressed_size_bytes": 635661,
+      "url": "https://services.google.com/fh/files/misc/core-products-icons.zip"
+    },
+    {
+      "member_count": 130,
+      "original_filename": "category-icons.zip",
+      "sha256": "e5bc3abd3527dc2500e9bff7f15870783e2c764129c49b7cd4c1b4e105345002",
+      "size_bytes": 795968,
+      "uncompressed_size_bytes": 1315217,
+      "url": "https://services.google.com/fh/files/misc/category-icons.zip"
+    }
+  ],
+  "official_source_page": "https://cloud.google.com/icons",
+  "original_archive_filenames": [
+    "core-products-icons.zip",
+    "category-icons.zip"
+  ],
+  "provider": "GCP",
+  "release_identifier": "current",
+  "retrieval_date": "2026-09-21",
+  "stated_usage_summary": "Google Cloud presents these product and category icons for diagrams, technical documentation, and related materials."
+}

@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Theme token sheet — single source of truth for the warm professional
+     palette. Tailwind config maps to the same values; these CSS variables
+     exist for places (inline SVG, third-party embeds) that can't reach
+     Tailwind's generated classes. */
+  --bg: #f7f4ef;
+  --bg-subtle: #f1ede6;
+
+  --surface: #fffefc;
+  --surface-raised: #ffffff;
+
+  --border: #e5e0d8;
+  --border-subtle: #eeeae4;
+
+  --text-primary: #171716;
+  --text-secondary: #5f5c56;
+  --text-tertiary: #8a867e;
+  --text-disabled: #b4b0a8;
+
+  --brand: #b85738;
+  --brand-hover: #a94c30;
+  --brand-active: #963f27;
+  --brand-soft: #f4ded5;
+  --brand-wash: #fbf1ed;
+
+  --success: #4d8a6a;
+  --success-soft: #e7f1eb;
+
+  --warning: #c88732;
+  --warning-soft: #f8edda;
+
+  --danger: #c94a4a;
+  --danger-soft: #f9e3e3;
+
+  --info: #607a96;
+  --info-soft: #e9eef4;
+
+  --aws: #ff9900;
+  --azure: #0078d4;
+  --gcp: #4285f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--brand-soft);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}

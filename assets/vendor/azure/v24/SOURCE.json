@@ -1,0 +1,23 @@
+{
+  "archive_urls": [
+    "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip"
+  ],
+  "archives": [
+    {
+      "member_count": 716,
+      "original_filename": "Azure_Public_Service_Icons_V24.zip",
+      "sha256": "921594ccd1bf3d9c0a1bd7b6d924e050551a59342f2b353bb74bdcf761c35141",
+      "size_bytes": 1033184,
+      "uncompressed_size_bytes": 1882481,
+      "url": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip"
+    }
+  ],
+  "official_source_page": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+  "original_archive_filenames": [
+    "Azure_Public_Service_Icons_V24.zip"
+  ],
+  "provider": "Azure",
+  "release_identifier": "v24",
+  "retrieval_date": "2026-09-21",
+  "stated_usage_summary": "Microsoft permits these icons for architectural diagrams, training materials, and documentation, subject to the limits and retained rights stated on the official source page."
+}

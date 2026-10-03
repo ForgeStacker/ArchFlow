@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "aliases": {
+            "items": { "minLength": 1, "type": "string" },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "category": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "checksum": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "deprecated": { "type": "boolean" },
+          "dimensions": {
+            "additionalProperties": false,
+            "properties": {
+              "height": { "exclusiveMinimum": 0, "type": "number" },
+              "width": { "exclusiveMinimum": 0, "type": "number" }
+            },
+            "required": ["height", "width"],
+            "type": "object"
+          },
+          "display_name": { "minLength": 1, "type": "string" },
+          "id": {
+            "pattern": "^(aws|azure|gcp):(service|resource|group|category):[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "kind": {
+            "enum": ["service", "resource", "group", "category"]
+          },
+          "path": {
+            "pattern": "^(aws|azure|gcp)/(service|resource|group|category)/[a-z0-9-]+/[a-z0-9-]+\\.svg$",
+            "type": "string"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "properties": {
+              "archives": { "type": "array" },
+              "official_source_page": { "type": "string" },
+              "release_identifier": { "minLength": 1, "type": "string" },
+              "retrieval_date": { "type": "string" },
+              "source_manifest": { "minLength": 1, "type": "string" }
+            },
+            "required": ["archives", "official_source_page", "release_identifier", "retrieval_date", "source_manifest"],
+            "type": "object"
+          },
+          "provider": { "enum": ["aws", "azure", "gcp"] },
+          "slug": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "source_paths": {
+            "items": {
+              "pattern": "^assets/vendor/.*\\.svg$",
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "viewBox": { "type": ["string", "null"] }
+        },
+        "required": ["aliases", "category", "checksum", "deprecated", "dimensions", "display_name", "id", "kind", "path", "provenance", "provider", "slug", "source_paths", "viewBox"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "providers": {
+      "additionalProperties": { "type": "object" },
+      "type": "object"
+    },
+    "schema_version": { "const": 1 }
+  },
+  "required": ["entries", "providers", "schema_version"],
+  "title": "Cloud Diagram Icon Registry",
+  "type": "object"
+}

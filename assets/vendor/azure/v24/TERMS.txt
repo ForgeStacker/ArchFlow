@@ -1,0 +1,4 @@
+Source: https://learn.microsoft.com/en-us/azure/architecture/icons/
+Archive: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip
+
+Reminder: Follow the provider's current trademark, brand, and icon-usage terms; check the official source page before publishing or redistributing these assets.

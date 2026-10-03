@@ -1,0 +1,23 @@
+{
+  "archive_urls": [
+    "https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip"
+  ],
+  "archives": [
+    {
+      "member_count": 8426,
+      "original_filename": "Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip",
+      "sha256": "d2d166c453526471749d520e0db022c459abef759d2946cf2dd1d1c992dc6526",
+      "size_bytes": 13988918,
+      "uncompressed_size_bytes": 16480656,
+      "url": "https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip"
+    }
+  ],
+  "official_source_page": "https://aws.amazon.com/architecture/icons/",
+  "original_archive_filenames": [
+    "Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip"
+  ],
+  "provider": "AWS",
+  "release_identifier": "2026-07-31",
+  "retrieval_date": "2026-09-21",
+  "stated_usage_summary": "AWS allows customers and partners to use this toolkit to create architecture diagrams and to place icons in materials such as presentations, whitepapers, data sheets, and posters."
+}

@@ -1,0 +1,458 @@
+schema_version: "1.0"
+ruleset:
+  id: "professional-cloud-architecture"
+  version: "1.0.0"
+  description: "Deterministic spacing, containment, port assignment, and orthogonal routing for cloud architecture diagrams."
+  deterministic: true
+  coordinate_unit: "px"
+  grid_size: 8
+  random_seed: 0
+
+precedence:
+  - "global_defaults"
+  - "provider_profile"
+  - "template"
+  - "diagram_override"
+  - "explicit_user_constraint"
+
+canvas:
+  background: "#FFFFFF"
+  adaptive_colors: true
+  margin:
+    top: 64
+    right: 64
+    bottom: 64
+    left: 64
+  minimum_width: 960
+  minimum_height: 640
+  maximum_width: 7680
+  maximum_height: 4320
+  expand_only: true
+  snap_all_geometry_to_grid: true
+
+flow:
+  default_direction: "left_to_right"
+  direction_locked: true
+  allowed_directions:
+    - "left_to_right"
+  reject_non_left_to_right: true
+  rank_policy:
+    external_source: 0
+    entrypoint: 1
+    gateway: 2
+    frontend: 3
+    service: 4
+    worker: 5
+    asynchronous_boundary: 5
+    cache: 6
+    datastore: 7
+    analytics: 7
+    external_sink: 8
+  same_rank_roles:
+    - ["service", "worker"]
+    - ["cache", "datastore"]
+  stable_tie_breakers:
+    - "explicit_order"
+    - "semantic_role"
+    - "group_path"
+    - "canonical_service_id"
+    - "node_id"
+
+nodes:
+  icon:
+    width: 64
+    height: 64
+    preserve_aspect_ratio: true
+    maximum_upscale_factor: 1.0
+  box:
+    minimum_width: 144
+    minimum_height: 104
+    maximum_width: 240
+    internal_padding:
+      top: 16
+      right: 16
+      bottom: 14
+      left: 16
+  label:
+    position: "below_icon"
+    maximum_lines: 3
+    maximum_characters_per_line: 22
+    line_height: 18
+    icon_to_label_gap: 10
+    horizontal_padding: 8
+    overflow: "grow_node_then_wrap"
+  badges:
+    maximum_count: 3
+    size: 16
+    gap: 4
+    node_clearance: 4
+  spacing:
+    minimum_horizontal: 64
+    minimum_vertical: 56
+    preferred_horizontal: 88
+    preferred_vertical: 72
+    same_service_replica_gap: 40
+    unrelated_component_gap: 96
+  alignment:
+    snap_centers_to_grid: true
+    align_peer_centers: true
+    maximum_peer_drift: 8
+
+containers:
+  hierarchy:
+    - "cloud"
+    - "region"
+    - "network"
+    - "availability_zone"
+    - "subnet"
+    - "service_group"
+  header:
+    height: 36
+    label_left_padding: 16
+    label_right_padding: 16
+    child_clearance: 20
+    edge_exclusion_zone: true
+  padding:
+    top: 40
+    right: 40
+    bottom: 40
+    left: 40
+  nested_padding:
+    top: 32
+    right: 32
+    bottom: 32
+    left: 32
+  sibling_gap:
+    horizontal: 48
+    vertical: 48
+  minimum_size:
+    width: 320
+    height: 224
+  border_clearance:
+    node: 32
+    edge_parallel: 20
+    edge_crossing: 8
+  rules:
+    child_must_be_inside_client_area: true
+    prohibit_header_overlap: true
+    prohibit_sibling_overlap: true
+    grow_to_fit_children: true
+    never_shrink_below_minimum: true
+    preserve_semantic_nesting: true
+    flatten_single_child_service_group: true
+    flatten_provider_boundaries: false
+
+layout:
+  primary_engine: "graphviz"
+  optional_engine: "elk"
+  strategy: "layered"
+  phases:
+    - "normalize_graph"
+    - "build_containment_tree"
+    - "classify_feedback_edges"
+    - "assign_ranks"
+    - "order_within_ranks"
+    - "place_containers"
+    - "place_nodes"
+    - "assign_ports"
+    - "route_edges"
+    - "place_edge_labels"
+    - "bounded_compaction"
+    - "validate_geometry"
+  rank_spacing:
+    minimum: 128
+    preferred: 160
+    with_edge_label: 184
+    across_container_boundary: 192
+  component_spacing:
+    minimum: 56
+    preferred: 72
+  crossing_minimization:
+    enabled: true
+    sweeps: 8
+    stable_order: true
+    penalties:
+      edge_crossing: 1000
+      node_overlap: 1000000
+      container_title_intersection: 1000000
+      reversed_primary_flow: 500
+      additional_bend: 80
+      route_length_per_grid_unit: 1
+  compaction:
+    enabled: true
+    maximum_iterations: 4
+    preserve_minimum_spacing: true
+    preserve_ranks: true
+    preserve_container_hierarchy: true
+
+ports:
+  assignment: "deterministic_fixed_slots"
+  slots_per_side: 7
+  corner_exclusion: 16
+  minimum_port_gap: 12
+  reserve_center_slot_for_primary_flow: true
+  primary_flow:
+    source_side: "east"
+    target_side: "west"
+    prohibit_reverse_rank_progression: true
+    allow_reverse_only_for_classified_feedback: true
+  semantic_overrides:
+    observability:
+      preferred_side: "south"
+    management:
+      preferred_side: "north"
+    feedback:
+      source_side: "south"
+      target_side: "south"
+    bidirectional:
+      choose_shortest_opposed_sides: true
+  allocation_order:
+    - "primary_flow"
+    - "data"
+    - "asynchronous"
+    - "control"
+    - "observability"
+    - "feedback"
+  sharing:
+    allow_same_port_for_parallel_edges: false
+    allow_same_port_for_opposite_directions: false
+    spread_fan_out_symmetrically: true
+    spread_fan_in_symmetrically: true
+
+routing:
+  type: "orthogonal"
+  algorithm: "obstacle_aware_manhattan"
+  rounded_corners: true
+  corner_radius: 8
+  clearance:
+    node: 24
+    node_label: 16
+    container_border: 16
+    container_header: 24
+    edge_label: 12
+    arrowhead: 12
+  segments:
+    minimum_terminal_stub: 24
+    minimum_middle_segment: 32
+    preferred_middle_segment: 48
+    snap_to_grid: true
+    collapse_collinear_segments: true
+  bends:
+    maximum_normal_edge: 5
+    maximum_feedback_edge: 7
+    prohibit_bend_inside_label: true
+    prohibit_consecutive_short_segments: true
+  parallel_edges:
+    minimum_gap: 12
+    preferred_gap: 16
+    use_distinct_lanes: true
+    preserve_source_order: true
+  obstacles:
+    avoid_nodes: true
+    avoid_node_labels: true
+    avoid_container_headers: true
+    avoid_edge_labels: true
+    avoid_unrelated_container_interiors: true
+    allow_crossing_own_container_boundary: true
+  crossings:
+    minimize: true
+    prohibit_edge_node_crossing: true
+    prohibit_edge_title_crossing: true
+    residual_jump_style: "arc"
+    residual_jump_size: 6
+    report_every_crossing: true
+  feedback_edges:
+    route: "outer_perimeter"
+    perimeter_gap: 48
+    stack_gap: 16
+    preferred_side: "south"
+  boundary_edges:
+    cross_border_perpendicularly: true
+    minimum_perpendicular_run: 24
+    consolidate_through_gateway: true
+    gateway_threshold: 4
+  fanout:
+    trunking_enabled: true
+    minimum_edges_for_trunk: 4
+    trunk_gap_from_source: 40
+    branch_gap: 16
+    require_same_semantic_kind: true
+  self_loops:
+    allowed: true
+    preferred_side: "south"
+    minimum_size: 48
+
+edges:
+  default_kind: "synchronous"
+  label:
+    maximum_characters: 28
+    maximum_lines: 2
+    padding_horizontal: 6
+    padding_vertical: 4
+    segment_offset: 8
+    placement: "longest_eligible_segment"
+    prefer_horizontal_segment: true
+    minimum_segment_length: 80
+    avoid_bends_by: 16
+    avoid_arrowheads_by: 20
+    background: "#FFFFFF"
+    move_before_reroute: true
+  arrowhead:
+    default: "classic"
+    size: 8
+    terminal_gap: 0
+  styles:
+    synchronous:
+      description: "Normal request or invocation"
+      stroke_color: "#4D4D4D"
+      stroke_width: 2
+      dashed: false
+      start_arrow: "none"
+      end_arrow: "classic"
+      end_fill: true
+    asynchronous:
+      description: "Queue, event, message, or deferred delivery"
+      stroke_color: "#4D4D4D"
+      stroke_width: 2
+      dashed: true
+      dash_pattern: "8 6"
+      start_arrow: "none"
+      end_arrow: "classic"
+      end_fill: true
+    data:
+      description: "Primary data read, write, replication, or stream"
+      stroke_color: "#1A73E8"
+      stroke_width: 2
+      dashed: false
+      start_arrow: "none"
+      end_arrow: "block"
+      end_fill: true
+    dependency:
+      description: "Non-flow dependency"
+      stroke_color: "#6B7280"
+      stroke_width: 1
+      dashed: false
+      start_arrow: "none"
+      end_arrow: "open"
+      end_fill: false
+    bidirectional:
+      description: "Two-way communication where two separate edges add no meaning"
+      stroke_color: "#4D4D4D"
+      stroke_width: 2
+      dashed: false
+      start_arrow: "classic"
+      start_fill: true
+      end_arrow: "classic"
+      end_fill: true
+    observability:
+      description: "Metrics, logs, and traces"
+      stroke_color: "#7A5AF8"
+      stroke_width: 1
+      dashed: false
+      start_arrow: "none"
+      end_arrow: "open"
+      end_fill: false
+  drawio_base_style: "edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=1;html=1;jettySize=24;jumpStyle=arc;jumpSize=6;"
+  direction_policy:
+    require_arrow_for_directed_edge: true
+    prohibit_arrow_for_association: true
+    prohibit_implicit_bidirectionality: true
+    split_bidirectional_when_labels_differ: true
+  labeling_policy:
+    omit_redundant_labels: true
+    protocol_only_when_meaningful: true
+    require_label_for_ambiguous_edge: true
+    require_legend_when_multiple_nondefault_styles: true
+
+structure:
+  external_components:
+    place_outside_cloud_boundary: true
+    minimum_boundary_gap: 80
+    align_with_first_or_last_related_rank: true
+  shared_services:
+    prefer_single_shared_node: true
+    duplicate_only_with_explicit_scope: true
+  gateways:
+    insert_for_cross_boundary_fan_in: 4
+    insert_for_cross_boundary_fan_out: 4
+    place_on_traffic_side_of_boundary: true
+  availability:
+    distribute_replicas_across_zones: true
+    align_equivalent_replicas: true
+    minimum_zone_count_for_ha: 2
+  datastores:
+    place_after_writers: true
+    keep_primary_and_replica_adjacent: true
+  queues:
+    place_between_producers_and_consumers: true
+    force_rank_boundary: true
+  observability:
+    place_below_primary_flow: true
+    exclude_from_primary_rank_progression: true
+
+provider_profiles:
+  aws:
+    hierarchy: ["cloud", "region", "vpc", "availability_zone", "subnet", "service_group"]
+    public_private_subnet_separation: true
+  azure:
+    hierarchy: ["cloud", "region", "virtual_network", "availability_zone", "subnet", "service_group"]
+    resource_group_is_visual_container: false
+  gcp:
+    hierarchy: ["cloud", "region", "vpc_network", "zone", "subnet", "service_group"]
+    project_is_visual_container: false
+  mixed_cloud:
+    provider_boundaries_required: true
+    intercloud_connections_use_gateway_nodes: true
+    minimum_provider_boundary_gap: 128
+
+quality_gates:
+  hard:
+    maximum_node_overlaps: 0
+    maximum_node_title_intersections: 0
+    maximum_edge_node_intersections_excluding_terminals: 0
+    maximum_edge_title_intersections: 0
+    maximum_label_overlaps: 0
+    maximum_unresolved_icons: 0
+    maximum_clipped_children: 0
+    maximum_unsatisfied_minimum_spacing_rules: 0
+    maximum_dangling_edges: 0
+    maximum_geometry_drift_on_repeat_run: 0
+  soft:
+    maximum_crossings_per_10_edges: 1
+    maximum_average_bends_per_edge: 3.0
+    maximum_average_route_stretch: 1.8
+    minimum_quality_score: 90
+  scoring:
+    start: 100
+    penalties:
+      residual_crossing: 3
+      bend_above_preferred: 1
+      fallback_icon: 4
+      long_edge_label: 2
+      route_stretch_above_target: 2
+      soft_spacing_violation: 2
+
+repair:
+  enabled: true
+  maximum_iterations: 6
+  deterministic: true
+  order:
+    - "expand_local_spacing"
+    - "reorder_peers_within_rank"
+    - "reassign_eligible_ports"
+    - "reroute_affected_edges"
+    - "expand_parent_containers"
+    - "expand_canvas"
+  prohibit_llm_geometry_repair: true
+  fail_if_hard_gate_remains: true
+
+diagnostics:
+  include_effective_rules: true
+  include_rule_trace: true
+  include_icon_resolution: true
+  include_node_geometry: true
+  include_edge_ports: true
+  include_edge_segments: true
+  include_crossings: true
+  include_repairs: true
+  redact_secrets: true

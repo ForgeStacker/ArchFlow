@@ -1,0 +1,73 @@
+"""Deterministic compilation, lookup, verification, and embedding of cloud icons."""
+
+from .compiler import (
+    DEFAULT_OUTPUT_ROOT,
+    DEFAULT_VENDOR_ROOT,
+    IconCollisionError,
+    IconCompilerError,
+    SourceLayoutError,
+    compile_registry,
+)
+from .embedder import (
+    IconChecksumError,
+    IconEmbeddingError,
+    SvgEmbedder,
+    embed_data_uri,
+    embed_svg,
+)
+from .registry import (
+    DEFAULT_REGISTRY_PATH,
+    IconEntry,
+    IconRegistry,
+    IconRegistryError,
+    RegistryFormatError,
+    RegistryVerificationError,
+    SvgSafetyError,
+    VerificationReport,
+    load,
+    load_registry,
+    normalize_name,
+    search,
+    verify,
+)
+from .resolver import (
+    AmbiguousIconError,
+    IconNotFoundError,
+    IconResolutionError,
+    IconResolver,
+    Resolution,
+    resolve_exact,
+)
+
+__all__ = [
+    "AmbiguousIconError",
+    "DEFAULT_OUTPUT_ROOT",
+    "DEFAULT_REGISTRY_PATH",
+    "DEFAULT_VENDOR_ROOT",
+    "IconChecksumError",
+    "IconCollisionError",
+    "IconCompilerError",
+    "IconEmbeddingError",
+    "IconEntry",
+    "IconNotFoundError",
+    "IconRegistry",
+    "IconRegistryError",
+    "IconResolutionError",
+    "IconResolver",
+    "RegistryFormatError",
+    "RegistryVerificationError",
+    "Resolution",
+    "SourceLayoutError",
+    "SvgEmbedder",
+    "SvgSafetyError",
+    "VerificationReport",
+    "compile_registry",
+    "embed_data_uri",
+    "embed_svg",
+    "load",
+    "load_registry",
+    "normalize_name",
+    "resolve_exact",
+    "search",
+    "verify",
+]

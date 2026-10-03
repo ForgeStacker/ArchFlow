@@ -1,0 +1,42 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Builds and packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Local environment and key files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Generated outputs
+/output/*
+!/output/.gitkeep
+
+# Web frontend
+web/node_modules/
+web/dist/
+web/.vite/
